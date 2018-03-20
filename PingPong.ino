@@ -1,7 +1,6 @@
 #include "pitches.h"
 #include "Servo.h"
 
-
 const int buzzer = 11; //Define pin 10, can use other PWM pins  (5,6 or 9)
                        //Note pins 3 and 11 can't be used when using the tone function in Arduino Uno
 const int songspeed = 1.5; //Change to 2 for a slower version of the song, the bigger the number the slower the song
@@ -131,7 +130,7 @@ void setup() {
 }   
 
 void loop() {//runs through the pins and turns the LED's on/off
-bool buttonLock = false;
+  bool buttonLock = false;
   for(int i=1;i<totalPins;i++){
     myservo.write((winCounter)*36);
     digitalWrite(i,HIGH);
@@ -148,10 +147,8 @@ bool buttonLock = false;
         buttonState=digitalRead(13);
       }
       
-      Serial.println(buttonState);
       if(buttonState==LOW && i==6 && buttonLock == false){
         winCounter++;
-        Serial.println("GameWin");
     for(int t=0;t<5;t++){
       
       for (int i=0;i<totalPins;i++) {
@@ -166,7 +163,7 @@ bool buttonLock = false;
     }
     delay(400);
     
-        if(winCounter==5){
+        if(winCounter==5){//checks to see if you have won the game;
          gameWin();
         }
       }
@@ -176,7 +173,7 @@ bool buttonLock = false;
     
   } 
 }   
-void gameWin(){
+void gameWin(){//this method is when the game wins. Flashes LED's and plays song
   myservo.write(180);
   
   while(true){
